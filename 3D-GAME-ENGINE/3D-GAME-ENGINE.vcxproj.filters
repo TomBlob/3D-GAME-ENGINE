@@ -1,12 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AppWindow.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="AppWindow.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Game Engine\WindowingSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsEngine.cpp">
+      <Filter>Game Engine\GraphicsEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AppWindow.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="AppWindow.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Game Engine\WindowingSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Game Engine\GraphicsEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="App">
+      <UniqueIdentifier>{d9c96980-a542-45a0-a8c7-653356d7b9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Engine">
+      <UniqueIdentifier>{a945c5f2-e0d7-4aa3-9a3f-850f7e4868ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Engine\WindowingSystem">
+      <UniqueIdentifier>{8fb3e185-6ac0-40ec-83d4-419499bf58f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Engine\GraphicsEngine">
+      <UniqueIdentifier>{b8180451-da41-4d66-b978-11697c26b040}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
