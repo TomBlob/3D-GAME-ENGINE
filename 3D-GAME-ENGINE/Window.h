@@ -10,8 +10,10 @@ public:
 	bool init();
 	bool broadcast();
 	bool isRun();
-
 	bool release();
+
+	RECT getClientWindowRect();
+	void setHWND(HWND hwnd);
 
 	// EVENTS
 	virtual void onCreate()=0;

@@ -1,8 +1,6 @@
 #include "Window.h"
 #include <iostream>
 
-Window* window = nullptr;
-
 Window::Window() {
 
 }
@@ -19,13 +17,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 
 	switch (msg) {
 	case WM_CREATE:
-		if (window) window->onCreate();
+	{
+		// Event fired when the window is created
+		// collected here..
+		Window* window = (Window*)((LPCREATESTRUCT)lparam)->lpCreateParams;
+		// .. and then stored for later lookup
+		SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
+		window->setHWND(hwnd);
+		window->onCreate();
 		break;
-
+	}
 	case WM_DESTROY:
-		if (window) window->onDestroy();
+	{
+		// Event fired when the window is destroyed
+		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+		window->onDestroy();
 		::PostQuitMessage(0);
 		break;
+	}
 
 	default:
 		return ::DefWindowProcW(hwnd, msg, wparam, lparam);
@@ -57,13 +66,9 @@ bool Window::init()
 		return false;
 	}
 
-
-	if (!window)
-		window = this;
-
 	// creation of window
 	m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, L"MyWindowClass", L"3D Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768,
-		NULL, NULL, GetModuleHandle(NULL), NULL);
+		NULL, NULL, GetModuleHandle(NULL), this);
 
 	// if creation fails, return false
 	if (!m_hwnd) {
@@ -91,7 +96,7 @@ bool Window::broadcast()
 
 	}
 
-	window->onUpdate();
+	this->onUpdate();
 
 	Sleep(0);
 
@@ -109,4 +114,15 @@ bool Window::release()
 		return false;
 
 	return true;
+}
+
+RECT Window::getClientWindowRect()
+{
+	RECT rc;
+	::GetClientRect(this->m_hwnd, &rc);
+	return rc;
+}
+
+void Window::setHWND(HWND hwnd) {
+	this->m_hwnd = hwnd;
 }

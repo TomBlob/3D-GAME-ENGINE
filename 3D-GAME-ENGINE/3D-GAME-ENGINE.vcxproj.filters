@@ -13,6 +13,9 @@
     <ClCompile Include="GraphicsEngine.cpp">
       <Filter>Game Engine\GraphicsEngine</Filter>
     </ClCompile>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>Game Engine\GraphicsEngine\SwapChain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -23,6 +26,9 @@
     </ClInclude>
     <ClInclude Include="GraphicsEngine.h">
       <Filter>Game Engine\GraphicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Game Engine\GraphicsEngine\SwapChain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +43,9 @@
     </Filter>
     <Filter Include="Game Engine\GraphicsEngine">
       <UniqueIdentifier>{b8180451-da41-4d66-b978-11697c26b040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Engine\GraphicsEngine\SwapChain">
+      <UniqueIdentifier>{62e38b8c-5649-4eca-8a47-bd3c60401c54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
