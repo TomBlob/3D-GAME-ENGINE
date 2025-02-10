@@ -7,6 +7,12 @@ SwapChain::SwapChain() {
 SwapChain::~SwapChain() {
 }
 
+bool SwapChain::present(bool vsync)
+{
+	m_swap_chain->Present(vsync, NULL);
+	return true;
+}
+
 bool SwapChain::init(HWND hwnd, UINT width, UINT height) {
 	ID3D11Device* device = GraphicsEngine::get()->m_d3d_device;
 
@@ -26,6 +32,21 @@ bool SwapChain::init(HWND hwnd, UINT width, UINT height) {
 	desc.Windowed = TRUE;
 
 	HRESULT hresult = GraphicsEngine::get()->m_dxgi_factory->CreateSwapChain(device, &desc, &m_swap_chain);
+
+	if (FAILED(hresult)) {
+		return false;
+	}
+
+	ID3D11Texture2D* buffer = NULL;
+	hresult = m_swap_chain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&buffer);
+
+
+	if (FAILED(hresult)) {
+		return false;
+	}
+
+	hresult = device->CreateRenderTargetView(buffer, NULL, &m_rtv);
+	buffer->Release();
 
 	if (FAILED(hresult)) {
 		return false;
